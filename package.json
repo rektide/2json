@@ -1,12 +1,12 @@
 {
-	"name": "ei-el",
+	"name": "2json",
 	"version": "1.0.0",
-	"description": "Ei-El converts stdin to a json array.",
-	"main": "ei-el.js",
+	"description": "2json converts stdin to a json array.",
+	"main": "2json.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"repository": "https://github.com/rektide/ei-el",
+	"repository": "https://github.com/rektide/2json",
 	"author": "rektide de la faye",
 	"license": "MIT",
 	"readmeFilename": "README.md",

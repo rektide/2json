@@ -1,3 +1,3 @@
-# Ei-El Stdin to JSON Converter
+# 2json Stdin to JSON Converter
 
-Ei-El converts stdin to json.
+2json converts stdin to json.
