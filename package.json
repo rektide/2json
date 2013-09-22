@@ -1,0 +1,17 @@
+{
+	"name": "ei-el",
+	"version": "1.0.0",
+	"description": "Ei-El converts stdin to a json array.",
+	"main": "ei-el.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": "https://github.com/rektide/ei-el",
+	"author": "rektide de la faye",
+	"license": "MIT",
+	"readmeFilename": "README.md",
+	"dependencies": {
+		"eachline": "~1.1.0",
+		"optimist": "~0.6.0"
+	}
+}
