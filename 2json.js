@@ -36,7 +36,6 @@ wordMatches= argv.w.toString().split(",").map(function(c,w){
 var matcher= wordMatches.join(""),
   expr= new RegExp(matcher),
   started= false
-console.log("EXPR",matcher)
 process.stdout.write("[")
 process.stdin.pipe(eachline(function(line){
 	if(line == "")
