@@ -4,7 +4,7 @@
 	"description": "2json converts stdin to a json array.",
 	"main": "2json.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 0"
 	},
 	"repository": "https://github.com/rektide/2json",
 	"author": "rektide de la faye",
@@ -13,5 +13,8 @@
 	"dependencies": {
 		"eachline": "~1.1.0",
 		"optimist": "~0.6.0"
+	},
+	"bin": {
+		"2json": "./2json.js"
 	}
 }
