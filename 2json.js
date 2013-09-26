@@ -6,6 +6,8 @@ var argv = optimist
   .usage("Usage: $0 [-w x,x,..,x] [-d '\s]'")
   .options("w", {alias: "words", default: "700"})
   .options("d", {alias: "delim", default: "\\s"})
+  .options("c", {alias: "callback"})
+  .options("o", {alias: "object"})
   .argv;
 
 var delim= argv.d,
@@ -33,10 +35,22 @@ wordMatches= argv.w.toString().split(",").map(function(c,w){
 	return expr.join("")
 })
 
+
+if(argv.c){
+	if(argv.c === true || argv.c == "true"){
+		process.stdout.write("callback(")
+	}else{
+		process.stdout.write(argv.c+"(")
+	}
+}
+if(argv.o){
+	process.stdout.write("{'"+argv.o+"':")
+}
+process.stdout.write("[")
+
 var matcher= wordMatches.join(""),
   expr= new RegExp(matcher),
   started= false
-process.stdout.write("[")
 process.stdin.pipe(eachline(function(line){
 	if(line == "")
 		return ""
@@ -63,6 +77,12 @@ process.stdin.pipe(eachline(function(line){
 })).pipe(process.stdout)
 process.stdin.on("end",function(){
 	process.stdout.write("]")
+	if(argv.o){
+		process.stdout.write("}")
+	}
+	if(argv.c){
+		process.stdout.write(")")
+	}
 })
 
 
