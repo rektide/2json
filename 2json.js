@@ -65,17 +65,20 @@ process.stdin.on("end",function(){
 	process.stdout.write("]")
 })
 
+
+var intTest= /^\-?([0-9]+)$/,
+  floatTest= /^\-?([0-9]+\.[0-9]*)$/
+
 function printIt(v){
 	if(!v)
 		return "null"
-	var i= parseInt(v),
-	  f= parseFloat(v)
-	if(f){
-		var diff= f-i
-		if(diff < 0.0001 && diff > 0.0001)
-			return i
-		else
-			return f
+	var floatExec= floatTest.exec(v)
+	if(floatExec){
+		return parseFloat(floatExec[1])
+	}else{
+		var intExec= intTest.exec(v)
+		if(intExec)
+			return parseInt(intExec[1])
 	}
 	v= v.replace(/"/g, '\\"')
 	return '"'+v+'"'
