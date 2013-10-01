@@ -8,10 +8,13 @@ var argv = optimist
   .options("d", {alias: "delim", default: "\\s"})
   .options("c", {alias: "callback"})
   .options("o", {alias: "object"})
+  .options("n", {alias: "newline", default: "false"})
   .argv;
 
 var delim= argv.d,
-  data= "[^"+delim+"]"
+  data= "[^"+delim+"]",
+  newline= argv.n == true.toString() || argv.n == true
+console.log("argv|",argv.n,"|",newline,"|")
 
 if(argv.w == "-1")
 	argv.w = "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
@@ -58,6 +61,8 @@ process.stdin.pipe(eachline(function(line){
 	if(!started){
 		started= true
 		buf.pop()
+	}else if(newline){
+		buf.push("\n")
 	}
 	var res= expr.exec(line)
 	if(!res){
@@ -100,6 +105,6 @@ function printIt(v){
 		if(intExec)
 			return parseInt(intExec[1])
 	}
-	v= v.replace(/"/g, '\\"')
+	v= v.replace(/"/g, '\"')
 	return '"'+v+'"'
 }
