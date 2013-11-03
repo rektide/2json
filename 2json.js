@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env node
 var eachline= require("eachline"),
   optimist= require("optimist")
 
