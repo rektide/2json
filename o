@@ -8,14 +8,11 @@ function o(opts){
 	this.push("{"+(opts._[0]||"o")+":")
 	return this
 }
-function _flush(cb){
+o.prototype._flush= function(cb){
 	this.push("}")
 	cb()
 }
 
-module.exports= o;
-o.prototype._flush= _flush;
-
-require("./_transform")(module,function(val){
+require("./_transform")(o,module,function(val){
 	return this.usage("Usage: $0 (slot)")
-});
+})

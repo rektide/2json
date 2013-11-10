@@ -8,9 +8,8 @@ transform.transform= transform
 /**
 * perform a common set of normalization functions on skeleton transform
 */
-function transform(mod,optFn){
-	var fn= mod.exports,
-	  flush= fn.prototype._flush
+function transform(fn,mod,optFn){
+	var flush= fn.prototype._flush
 	// inherit from Transform
 	util.inherits(fn,tran)
 
@@ -26,10 +25,11 @@ function transform(mod,optFn){
 	if(flush)
 		fn.prototype._flush= flush
 
-	// if this is the main module, run the suggested optimist configurers and then start up a pipeline
+	// if this is the main module,
 	if(require.main== mod){
+		// run the suggested optimist configurers 
 		if(optFn && optFn instanceof Function) optFn= [optFn]
-		// run all opt initializers
+		// run all opt initializers, get stdin/stdout
 		var opts= optFn.reduce(function(prev,val,i){return val.call(prev)},require("optimist")).argv,
 		  stdin= opts.stdin= process.stdin,
 		  stdout= opts.stdout= process.stdout
