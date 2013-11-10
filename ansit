@@ -1,0 +1,2 @@
+#!/bin/sh
+ito ansible_facts

@@ -1,18 +1,19 @@
 #!/usr/bin/env node
-var transform= require("stream").Transform
+var transform= require("stream").Transform,
+  enc= require("./encode").encoder
 
 function o(opts){
 	if(!(this instanceof o)) return new o(slot)
 	transform.call(this, opts)
 
-	this.push("{"+(opts._[0]||"o")+":")
+	this.push('{'+enc(opts._[0]||"o")+":")
 	return this
 }
+require("./_transform")(o,module,function(val){
+	return this.usage("Usage: $0 (slot)")
+})
+
 o.prototype._flush= function(cb){
 	this.push("}")
 	cb()
 }
-
-require("./_transform")(o,module,function(val){
-	return this.usage("Usage: $0 (slot)")
-})

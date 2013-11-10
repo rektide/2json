@@ -8,11 +8,13 @@ function a(opts){
 	this.push("[")
 	return this
 }
+require("./_transform")(a,module,function(opts){
+	return this.usage("Usage: $0")
+})
+
 a.prototype._flush= function(cb){
 	this.push("]")
 	cb()
 }
 
-require("./_transform")(a,module,function(opts){
-	return this.usage("Usage: $0")
-})
+

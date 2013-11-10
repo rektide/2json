@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+var transform= require("stream").Transform
+
+function encode(opts){
+	if(!(this instanceof encode)) return new encode(slot)
+	transform.call(this, opts)
+	return this
+}
+require("./_transform")(encode,module,function(val){
+	return this.usage("Usage: $0").default("lines",true)
+})
+
+/**
+* expose the encoder
+*/
+encode.encoder= encoder
+function encoder(chunk){
+	return isNaN(chunk)? '"'+chunk+'"': chunk
+}
+
+encode.prototype._transform= function(chunk,enc,cb){
+	this.push(module.exports.encoder(chunk))
+	cb()
+}

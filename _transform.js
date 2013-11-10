@@ -27,14 +27,24 @@ function transform(fn,mod,optFn){
 
 	// if this is the main module,
 	if(require.main== mod){
-		// run the suggested optimist configurers 
-		if(optFn && optFn instanceof Function) optFn= [optFn]
-		// run all opt initializers, get stdin/stdout
-		var opts= optFn.reduce(function(prev,val,i){return val.call(prev)},require("optimist")).argv,
-		  stdin= opts.stdin= process.stdin,
-		  stdout= opts.stdout= process.stdout
-		// create and pipe through
-		var t= new fn(opts)
-		stdin.pipe(t).pipe(stdout)
+		process.nextTick(function(){
+			// run the suggested optimist configurers 
+			if(optFn && optFn instanceof Function) optFn= [optFn]
+			// run all opt initializers, get stdin/stdout
+			var opts= optFn.reduce(function(prev,val,i){return val.call(prev)},require("optimist")).argv,
+			  stdin= process.stdin,
+			  stdout= process.stdout
+			// use eachline if specified
+			if(opts.lines){
+				var each= require("eachline")()
+				stdin= stdin.pipe(each)
+			}
+			// save stdin/stdout
+			opts.stdin= stdin
+			opts.stdout= stdout
+			// create and pipe through
+			var t= new fn(opts)
+			stdin.pipe(t).pipe(stdout)
+		})
 	}
 }
