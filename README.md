@@ -1,6 +1,6 @@
 # 2json Stdin to JSON Converter
 
-It is a set of raw, primitive brute instruments to drag the dead ancient pre-connected "on-line"/command console world into a place where [*`jq`*](https://github.com/stedolan/jq) may be used, where selection can begin to mean soething.
+It is a set of raw, primitive brute instruments to drag the dead ancient pre-connected "on-line"/command console world into a place where [*`jq`*](https://github.com/stedolan/jq) may be used, where selection can begin to mean something.
 
 2json converts stdin to json which it streams to stdout, in it's most basic use turning lines into single array elements. [`2json`](#2json) has a number of options to allow cutting up columnar data as well. In addition to 2json proper, there are also a number of tools:
 
@@ -26,5 +26,7 @@ It is a set of raw, primitive brute instruments to drag the dead ancient pre-con
 This is a very small, simple work. It was made possible by:
 
 [**`ansible`**](http://github.com/ansible/ansible), which is one of the first console programs i've slammed up into being unprepared to hand over json
+
 [**`termkit`**](http://acko.net/blog/on-termkit/), which made a formative point that pipes might do well to adopt structure on which to lay semantics then data
+
 **`dolor`**, of earth and air
