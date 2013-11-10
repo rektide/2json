@@ -1,14 +1,21 @@
 #!/usr/bin/env node
-var optimist= require("optimist")
+var transform= require("stream").Transform
 
-var argv = optimist
-  .usage("Usage: $0 (slot)")
-  .argv;
+function o(opts){
+	if(!(this instanceof o)) return new o(slot)
+	transform.call(this, opts)
 
-var slot= argv._[0]||"o"
+	this.push("{"+(opts._[0]||"o")+":")
+	return this
+}
+function _flush(cb){
+	this.push("}")
+	cb()
+}
 
-process.stdout.write("{'"+slot+"':")
-process.stdin.pipe(process.stdout)
-process.stdin.on("end",function(){
-	process.stdout.write("}")
-})
+module.exports= o;
+o.prototype._flush= _flush;
+
+require("./_transform")(module,function(val){
+	return this.usage("Usage: $0 (slot)")
+});
