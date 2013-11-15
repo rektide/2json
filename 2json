@@ -14,7 +14,6 @@ var argv = optimist
 var delim= argv.d,
   data= "[^"+delim+"]",
   newline= argv.n == true.toString() || argv.n == true
-console.log("argv|",argv.n,"|",newline,"|")
 
 if(argv.w == "-1")
 	argv.w = "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
