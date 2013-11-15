@@ -1,2 +1,2 @@
 #!/bin/sh
-ito ansible_facts
+2json|ito ansible_facts
