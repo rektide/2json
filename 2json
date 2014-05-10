@@ -2,6 +2,38 @@
 var eachline= require("eachline"),
   optimist= require("optimist")
 
+//// UTIL
+
+var intTest= /^\-?([0-9]+)$/,
+  floatTest= /^\-?([0-9]+\.[0-9]*)$/
+
+function printIt(v){
+	if(!v)
+		return "null"
+	var floatExec= floatTest.exec(v)
+	if(floatExec){
+		return parseFloat(floatExec[1])
+	}else{
+		var intExec= intTest.exec(v)
+		if(intExec)
+			return parseInt(intExec[1])
+	}
+	v= v.replace(/"/g, '\"')
+	return '"'+v+'"'
+}
+
+function trim(a){
+	for(var i = a.length-1; i > 0; --i){
+		if(!a[i])
+			continue
+		a= Array.prototype.splice.call(a,i+1)
+		break
+	}
+	return a
+}
+
+//// ARG PROCESSING
+
 var argv = optimist
   .usage("Usage: $0 [-w x,x,..,x] [-d '\s]'")
   .options("w", {alias: "words", default: "-1"})
@@ -41,6 +73,9 @@ wordMatches= argv.w.toString().split(",").map(function(c,w){
 
 if(argv.slots){
 	argv.slots= argv.slots.split(",")
+	argv.slots.forEach(function(v,k){
+		argv.slots[k]= printIt(v)
+	})
 }
 if(argv.c){
 	if(argv.c === true || argv.c == "true"){
@@ -49,10 +84,12 @@ if(argv.c){
 		process.stdout.write(argv.c+"(")
 	}
 }
+
+//// MAIN PROGRAM
+
 if(argv.o){
 	process.stdout.write("{'"+argv.o+"':")
 }
-
 process.stdout.write("[")
 
 var matcher= wordMatches.join(""),
@@ -110,30 +147,4 @@ process.stdin.on("end",function(){
 })
 
 
-var intTest= /^\-?([0-9]+)$/,
-  floatTest= /^\-?([0-9]+\.[0-9]*)$/
 
-function printIt(v){
-	if(!v)
-		return "null"
-	var floatExec= floatTest.exec(v)
-	if(floatExec){
-		return parseFloat(floatExec[1])
-	}else{
-		var intExec= intTest.exec(v)
-		if(intExec)
-			return parseInt(intExec[1])
-	}
-	v= v.replace(/"/g, '\"')
-	return '"'+v+'"'
-}
-
-function trim(a){
-	for(var i = a.length-1; i > 0; --i){
-		if(!a[i])
-			continue
-		a= Array.prototype.splice.call(a,i+1)
-		break
-	}
-	return a
-}
