@@ -30,3 +30,8 @@ This is a very small, simple work. It was made possible by:
 [**`termkit`**](http://acko.net/blog/on-termkit/), which made a formative point that pipes might do well to adopt structure on which to lay semantics then data
 
 **`dolor`**, of earth and air
+
+# Good Software
+
+[*`jq`*](https://github.com/stedolan/jq)
+[*`yaml2json`*](https://github.com/coolaj86/yaml2json)
