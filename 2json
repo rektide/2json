@@ -69,6 +69,7 @@ process.stdin.pipe(eachline(function(line){
 		buf.push("\n")
 	}
 	var res= expr.exec(line)
+	trim(res)
 	if(!res){
 		buf.push("null")
 	}else if(res.length == 2){
@@ -125,4 +126,14 @@ function printIt(v){
 	}
 	v= v.replace(/"/g, '\"')
 	return '"'+v+'"'
+}
+
+function trim(a){
+	for(var i = a.length-1; i > 0; --i){
+		if(!a[i])
+			continue
+		a= Array.prototype.splice.call(a,i+1)
+		break
+	}
+	return a
 }
