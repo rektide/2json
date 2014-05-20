@@ -127,7 +127,7 @@ process.stdin.pipe(eachline(function(line){
 		}
 		if(i < res.length){
 			buf.push(',"_extra":[', printIt(res[i]))
-			for(; i < res.length; ++i){
+			for(; ++i < res.length;){
 				buf.push(",",printIt(res[i]))
 			}
 			buf.push("]")
